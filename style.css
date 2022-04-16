@@ -5,7 +5,7 @@
 
 body {
     margin: 20px auto;
-    font-family: "Lato";
+    font-family: "Roboto";
     font-weight: 300;
 }
 
@@ -39,7 +39,7 @@ a:hover {
     margin: 0 auto;
     padding-bottom: 25px;
     background: #eee;
-    width: 600px;
+    width: 90%;
     max-width: 100%;
     border: 2px solid #212121;
     border-radius: 4px;
@@ -63,7 +63,7 @@ a:hover {
     padding: 10px;
     background: #fff;
     height: 300px;
-    width: 530px;
+    width: 100%;
     border: 1px solid #a7a7a7;
     overflow: auto;
     border-radius: 4px;
@@ -147,6 +147,15 @@ a#exit {
     width: 150px;
 }
 
-div {
-    width: 150px;
+#wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+#left {
+    width: 20%;
+}
+
+#right {
+    width: 30%;
 }

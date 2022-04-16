@@ -41,7 +41,7 @@ function loginForm(){
         <meta charset="utf-8" />
  
         <title>Tuts+ Chat Application</title>
-        <meta name="description" content="Tuts+ Chat Application" />
+        <meta name="description" content="ALLROSA" />
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
@@ -54,22 +54,22 @@ function loginForm(){
     <div id="wrapper">
         <div id="header">
             <div id="logo">
+                
             </div>
             <div id="user">
             </div>
         </div>
         <div id="left">
             <div id="question">
+            <p>Вопрос</p>
+                <p>Да</p>
+                <p>Нет</p>
             </div>
             <div id="applications">
+                <p>Здесь будет выпадающий список заявлений</p>
             </div>
         </div>
         <div id="center">
-            <div id="menu">
-                <p class="welcome">Welcome, <b><?php echo $_SESSION['name']; ?></b></p>
-                <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
-            </div>
-
             <div id="chatbox">
             <?php
             if(file_exists("log.html") && filesize("log.html") > 0){
@@ -86,13 +86,15 @@ function loginForm(){
         </div>
         <div id="right">
             <div id="birthday">
+            <p>Здесь будет выпадающий список дней рождений</p>
             </div>
             <div id="compatibility">
+            <p>Здесь будет список совместимость</p>
             </div>
             <div id="tech">
+            <p>Здесь будет тех поддержка</p>
             </div>
         </div>
-    </div>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript">
             // jQuery Document
@@ -132,8 +134,36 @@ function loginForm(){
                 });
             });
         </script>
+    </div>
+        
     </body>
 </html>
 <?php
+include_once("connect.php");
+if(!pg_ping($connect))
+    die("Ошибка соединения с базой данных");
+compatibility(1, 2, $connect);
+pg_close($connect);
+}
+function compatibility($myid, $otherid, $connect){
+//    $command = "select que_id, answer from empl_quest where empl_id='$myid'";
+//    $query = pg_query($connect, $command);
+    $myanswers = array(array(3, 1), array(5, 0), array(7, 1));
+    $otheranswers = array(array(3, 1), array(5, 1), array(7, 1));
+    $common = array();
+    $compatibility = 0;
+    foreach ($myanswers as $my){
+        foreach ($otheranswers as $other){
+            if($my[0] == $other[0]){
+                array_push($common, $my[0]);
+            }
+        }
+    }
+    $compatibility = 0;
+    foreach ($common as $c){
+        $compatibility += $myanswers[$c][1] * $otheranswers[$c][1];
+    }
+    $compatibility /= sizeof($common);
+    
 }
 ?>
