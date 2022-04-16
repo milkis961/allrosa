@@ -1,5 +1,6 @@
 <?php
- 
+include_once("connect.php");
+
 session_start();
  
 if(isset($_GET['logout'])){    
@@ -39,39 +40,60 @@ function loginForm(){
 <html lang="en">
     <head>
         <meta charset="utf-8" />
- 
-        <title>Tuts+ Chat Application</title>
+        <title>ALLROSA</title>
         <meta name="description" content="ALLROSA" />
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="styles/style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
     <?php
     if(!isset($_SESSION['name'])){
         loginForm();
     }
     else {
     ?>
+
+    <div>
     <div id="header">
-            <div id="logo">
-            <p>Здесь будет логотип</p>
+        <div>
+            <img id= logo src="img/Diamond.png">
+        </div>
+        <div id="user">
+            <p class="profile">Здесь будет профиль пользователя</p>
+        </div>
+    </div>
+    <div id="page">
+    <div id="left">
+        <div id="question">
+            <div id="quest">
+                <?php
+                $command = "select quest from questions";
+                $query = pg_query($connect, $command);
+                $questions = pg_fetch_all($query);
+                $id = rand(1, sizeof($questions));
+                $command = "SELECT quest  FROM questions where que_id = '$id'";
+                $query = pg_query($connect, $command);
+                $result = pg_fetch_all($query);
+                echo $result[0]['quest'];
+                ?>
             </div>
-            <p>Здесь будет шапка</p>
-            <div id="user">
-            <p>Здесь будет профиль пользователя</p>
+            <input class="que" type="button" value="Да" id="yes">
+            <input class="que" type="button" value="Нет" id="no">
+            <input class="que" type="button" value="ДОБАВИТЬ ВОПРОС" id="add_que">
+        </div>
+        <div id="applications">
+            <button class="btn" id="first">Заявки</button>
+            <div class="dropdown">
+                <button id="second" class="btn" style="border-left:1px solid #0d8bf2">
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">Зарплата</a>
+                    <a href="#">Отпуск</a>
+                </div>
             </div>
         </div>
+    </div>
     <div id="wrapper">
-        
-        <div id="left">
-            <div id="question">
-            <p>Вопрос</p>
-                <p>Да</p>
-                <p>Нет</p>
-            </div>
-            <div id="applications">
-                <p>Здесь будет выпадающий список заявлений</p>
-            </div>
-        </div>
         <div id="center">
             <div id="chatbox">
             <?php
@@ -86,17 +108,6 @@ function loginForm(){
                 <input name="usermsg" type="text" id="usermsg" />
                 <input name="submitmsg" type="submit" id="submitmsg" value="Отправить" />
             </form>
-        </div>
-        <div id="right">
-            <div id="birthday">
-            <p>Здесь будет выпадающий список дней рождений</p>
-            </div>
-            <div id="compatibility">
-            <p>Здесь будет список совместимость</p>
-            </div>
-            <div id="tech">
-            <p>Здесь будет тех поддержка</p>
-            </div>
         </div>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript">
@@ -138,11 +149,33 @@ function loginForm(){
             });
         </script>
     </div>
-        
+    <div id="right">
+        <div id="birthday">
+            <input type="button" value="Дни рождения">
+
+        </div>
+        <div id="compatibility">
+            <p>a</p>
+            <p>a</p>
+            <p>a</p>
+            <p>a</p>
+            <p>a</p>
+            <p>a</p>
+            <p>a</p>
+            <p>a</p>
+            <p>a</p>
+            <p>a</p>
+        </div>
+        <div id="tech">
+            <input type="button" value="Тех. поддержка">
+        </div>
+    </div>
+        </div>
+    </div>
     </body>
 </html>
+
 <?php
-include_once("connect.php");
 if(!pg_ping($connect))
     die("Ошибка соединения с базой данных");
 compatibility(1, 2, $connect);
