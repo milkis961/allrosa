@@ -32,7 +32,7 @@ function loginForm(){
     </form>
   </div>';
 }
- 
+
 ?>
  
 <!DOCTYPE html>
@@ -51,12 +51,25 @@ function loginForm(){
     }
     else {
     ?>
-        <div id="wrapper">
+    <div id="wrapper">
+        <div id="header">
+            <div id="logo">
+            </div>
+            <div id="user">
+            </div>
+        </div>
+        <div id="left">
+            <div id="question">
+            </div>
+            <div id="applications">
+            </div>
+        </div>
+        <div id="center">
             <div id="menu">
                 <p class="welcome">Welcome, <b><?php echo $_SESSION['name']; ?></b></p>
                 <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
             </div>
- 
+
             <div id="chatbox">
             <?php
             if(file_exists("log.html") && filesize("log.html") > 0){
@@ -65,12 +78,21 @@ function loginForm(){
             }
             ?>
             </div>
- 
+    
             <form name="message" action="">
                 <input name="usermsg" type="text" id="usermsg" />
-                <input name="submitmsg" type="submit" id="submitmsg" value="Send" />
+                <input name="submitmsg" type="submit" id="submitmsg" value="Отправить" />
             </form>
         </div>
+        <div id="right">
+            <div id="birthday">
+            </div>
+            <div id="compatibility">
+            </div>
+            <div id="tech">
+            </div>
+        </div>
+    </div>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript">
             // jQuery Document

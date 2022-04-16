@@ -141,3 +141,12 @@ a#exit {
 .msgln b.user-name-left {
     background: orangered;
 }
+
+#question {
+    height: 100px;
+    width: 150px;
+}
+
+div {
+    width: 150px;
+}
