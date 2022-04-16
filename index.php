@@ -51,14 +51,17 @@ function loginForm(){
     }
     else {
     ?>
-    <div id="wrapper">
-        <div id="header">
+    <div id="header">
             <div id="logo">
-                
+            <p>Здесь будет логотип</p>
             </div>
+            <p>Здесь будет шапка</p>
             <div id="user">
+            <p>Здесь будет профиль пользователя</p>
             </div>
         </div>
+    <div id="wrapper">
+        
         <div id="left">
             <div id="question">
             <p>Вопрос</p>
