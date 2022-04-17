@@ -15,7 +15,7 @@ $used_id = [];
 
 <body>
 <div id="page">
-    <form method="post" action="main.php">
+    <form method="post">
         <ul>
             <li>
                 <label for="quest1">Вопрос №1:</label>
@@ -98,7 +98,7 @@ $used_id = [];
                 $query = pg_query($connect, $command);
                 $employees = pg_fetch_all($query);
                 //$id = rand(0, sizeof($employees));
-                $id = 4;
+                $id = 5;
                 $count = 0;
                 for ($i = 1; $i <= sizeof($used_id); $i++) {
                     $key = "que$i";
@@ -107,6 +107,7 @@ $used_id = [];
                     $command = "insert into empl_quest (empl_id, que_id, answer) values ('$id', '$used_id[$index]', '$answer')";
                     pg_query($connect, $command);
                 }
+                header('Location: main.php');
             }
             ?>
         </ul>

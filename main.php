@@ -4,8 +4,9 @@ include_once("connect.php");
 //     die("Ошибка соединения с базой данных");
 session_start();
 $my_id = 0;
+$_SESSION['name'] = 'person';
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -58,16 +59,6 @@ $my_id = 0;
                             send_answer($my_id, $result[0]['id'], 0, $connect);
                             break;
                     }
-                }
-
-                function select() {
-                    echo "The select function is called.";
-                    exit;
-                }
-
-                function insert() {
-                    echo "The insert function is called.";
-                    exit;
                 }
             ?>
             <form method="POST" action="add_question.php">
@@ -138,31 +129,31 @@ $my_id = 0;
     </div>
     <div id="right">
         <div id="birthday">
-            <input type="button" value="Дни рождения">
+            
             <div class="dropdown">
-                <button id="third" class="btn" style="border-left:1px solid #0d8bf2">
+                <button id="third" class="btn" style="border-left:1px solid #0d8bf2" text="Дни рождения">
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">
-                <!-- <?php
+                <?php
                 include('birthdays.php');
                 $birthdays = birthdays();
                 foreach ($birthdays as $bd){
                     echo "<p>".$bd['name'].' '.$bd['birthday']."</p>";
                 }
-                ?> -->
+                ?>
                 </div>
                 
             </div>
         </div>
         <div id="compatibility">
-            <?php
-                // include('compatibility.php');
-                // $people = get_compatibilities(0, $connect);
-                // foreach ($people as $_p){
-                //     echo "<p>".$_p['name'].' '.$_p['compat']."</p>";
-                // }
-            ?>
+            <!-- <?php
+                //  include('compatibility.php');
+                //  $people = get_compatibilities(0, $connect);
+                //  foreach ($people as $_p){
+                //      echo "<p>".$_p['name'].' '.$_p['compat']."</p>";
+                //  }
+            ?> -->
         </div>
         <div id="tech">
             <input type="button" value="Тех. поддержка">
