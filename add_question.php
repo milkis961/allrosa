@@ -28,7 +28,7 @@ function add_question($quest, $connect)
             </li>
             <?php
             include_once('connect.php');
-            if (isset($_POST['que'])) 
+            if (isset($_POST['que']) and strlen($_POST['que']) > 4) 
             {
                 add_question($_POST['que'], $connect);
                 header('Location: main.php');

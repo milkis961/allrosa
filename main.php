@@ -4,7 +4,7 @@ include_once("connect.php");
 //     die("Ошибка соединения с базой данных");
 session_start();
 $my_id = 1;
-$_SESSION['name'] = 'person';
+$_SESSION['name'] = 'Собянин Сергей';
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +29,7 @@ $_SESSION['name'] = 'person';
             <img id= logo src="img/Diamond.png">
         </div>
         <div id="user">
-            <p class="profile">Здесь будет профиль пользователя</p>
+            <p class="profile">Привет, <?php echo $_SESSION['name'];?></p>
         </div>
     </div>
     <div id="page">
@@ -52,10 +52,10 @@ $_SESSION['name'] = 'person';
             <?php
                 if (isset($_POST['action'])) {
                     switch ($_POST['action']) {
-                        case 'Да':
+                        case 'yes':
                             send_answer($my_id, $result[0]['id'], 1, $connect);
                             break;
-                        case 'Нет':
+                        case 'no':
                             send_answer($my_id, $result[0]['id'], 0, $connect);
                             break;
                     }
@@ -129,7 +129,6 @@ $_SESSION['name'] = 'person';
     </div>
     <div id="right">
         <div id="birthday">
-            
             <div class="dropdown">
                 <button id="third" class="btn" style="border-left:1px solid #0d8bf2" text="Дни рождения">
                     <i class="fa fa-caret-down"></i>

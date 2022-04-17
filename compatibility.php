@@ -6,14 +6,17 @@ function compatibility($myid, $otherid, $connect){
     $command = "select que_id, answer from empl_quest where empl_id='$otherid' order by que_id";
     $query = pg_query($connect, $command);
     $otheranswers =  pg_fetch_all($query);
-
-    $common = array();
+    $compatibility = 0;
     $_i = 0;
     $_j = 0;
+    $_n = 0;
     while ($_i < sizeof($myanswers) and $_j < sizeof($myanswers)){   
         if($myanswers[$_i]['que_id'] == $otheranswers[$_j]['que_id'])
         {
-            array_push($common, $myanswers[$_i]['que_id']);
+            $q_id = $myanswers[$_i]['que_id'];
+            if($myanswers[$_i]['answer'] == $otheranswers[$_j]['answer'])
+                $compatibility += 1.0;
+            $_n++;
             $_j++;
             $_i++;
         } 
@@ -22,13 +25,8 @@ function compatibility($myid, $otherid, $connect){
         else 
             $_i++;
     }
-    if(sizeof($common) == 0)
+    if($_n == 0)
         return 0;
-    $compatibility = 0;
-    foreach ($common as $c){
-        if($myanswers[$c]['answer'] == $otheranswers[$c]['answer'])
-            $compatibility += 1.0;
-    }
-    $compatibility /= sizeof($common);
+    $compatibility /= $_n;
     return $compatibility;
 }
