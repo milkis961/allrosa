@@ -70,7 +70,9 @@ $my_id = 0;
                     exit;
                 }
             ?>
-            <input class="que2" type="button" value="ДОБАВИТЬ ВОПРОС" id="add_que">
+            <form method="POST" action="add_question.php">
+            <input class="que2" type="submit" value="ДОБАВИТЬ ВОПРОС" id="add_que">
+            </form>
         </div>
         <div id="applications">
             <button class="btn" id="first">Заявки</button>
