@@ -1,7 +1,9 @@
 <?php
-function add_question($quest, $connect){
-    $command = "insert into questions (quest) values ('$quest')";
-    pg_exec($connect, pg_query($connect, $command));
+function add_question($quest, $connect)
+{
+    $command = "insert into questions (quest) values ('$quest')" 
+    or die("Ошибка подключения к базе данных.".pg_last_error());
+    pg_query($connect, $command);
 }
 ?>
 
@@ -9,13 +11,13 @@ function add_question($quest, $connect){
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>New question</title>
+    <title>Новый вопрос</title>
     <link rel="stylesheet" href="styles/anketa.css">
 </head>
 
 <body>
 <div id="page">
-    <form method="post" action="main.php">
+    <form method="post">
         <ul>
             <li>
                 <label for="quest1">Вопрос:</label>
@@ -25,8 +27,11 @@ function add_question($quest, $connect){
                 <button type="submit">Отправить вопрос</button>
             </li>
             <?php
-            if (isset($_POST['que'])) {
+            include_once('connect.php');
+            if (isset($_POST['que'])) 
+            {
                 add_question($_POST['que'], $connect);
+                header('Location: main.php');
             }
             ?>
         </ul>

@@ -3,7 +3,7 @@ include_once("connect.php");
 // if(!pg_ping($connect))
 //     die("Ошибка соединения с базой данных");
 session_start();
-$my_id = 0;
+$my_id = 1;
 $_SESSION['name'] = 'person';
 ?>
 
@@ -47,8 +47,8 @@ $_SESSION['name'] = 'person';
                 echo $result[0]['quest'];
                 ?>
             </div>
-            <input class="que" type="submit" value="Да" id="yes">
-            <input class="que" type="submit" value="Нет" id="no">
+            <input class="que" type="submit" value="Да" id="yes" name='action'>
+            <input class="que" type="submit" value="Нет" id="no" name='action'>
             <?php
                 if (isset($_POST['action'])) {
                     switch ($_POST['action']) {
@@ -143,17 +143,20 @@ $_SESSION['name'] = 'person';
                 }
                 ?>
                 </div>
-                
             </div>
         </div>
         <div id="compatibility">
-            <!-- <?php
-                //  include('compatibility.php');
-                //  $people = get_compatibilities(0, $connect);
-                //  foreach ($people as $_p){
-                //      echo "<p>".$_p['name'].' '.$_p['compat']."</p>";
-                //  }
-            ?> -->
+            <?php
+            include('compatibility.php');
+          //  $people = get_compatibilities($my_id, $connect);
+          $my_id = 1;
+            $command = "select id, name from employees where id <> $my_id";
+        $query = pg_query($command);
+        $people = pg_fetch_all($query);
+            foreach ($people as $_p){
+                echo "<p>".$_p['name'].' '.number_format(compatibility($my_id, $_p['id'], $connect), 2)."</p>";
+            }
+            ?>
         </div>
         <div id="tech">
             <input type="button" value="Тех. поддержка">

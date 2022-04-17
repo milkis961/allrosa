@@ -90,18 +90,27 @@ a:hover {
     text-decoration: underline;
 }
 
+#left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 20%;
+    width: 300px;
+    border: 2px solid #212121;
+}
+
 #right {
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 20%;
+    width: 300px;
     border: 2px solid #212121;
 }
 
 #wrapper {
     background: #eee;
-    width: 80%;
-    max-width: 80%;
+    width: 500px;
     border: 2px solid #212121;
     border-radius: 4px;
 }
@@ -210,10 +219,6 @@ a#exit {
 #compatibility {
     border: 1px solid #a7a7a7;
     height: 80%;
-}
-
-#right {
-    width: 30%;
 }
 
 .btn {
